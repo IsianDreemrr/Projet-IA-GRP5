@@ -1,7 +1,7 @@
 # Projet-IA-GRP5
 
 
-# Enoncé du Projet choisit : 
+# Enoncé du Projet : 
 
  Projet Machine Learning classification / régression / clustering, votre application devra contenir une page analytique, une page entrainement et une page permettant d’utiliser le ou les modèles entraînés. 
 
