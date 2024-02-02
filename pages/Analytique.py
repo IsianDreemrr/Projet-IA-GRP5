@@ -1,10 +1,9 @@
 import streamlit as st
-from notebook import execute_all_analyses
+from script_analyse import execute_all_analyses
 import pandas as pd 
 
 def main():
     st.title("Analyse Complète des Données")
-
     analyses, corr_plot_path, correlations, plot_paths = execute_all_analyses()
 
     st.write("## Analyses Basiques")
