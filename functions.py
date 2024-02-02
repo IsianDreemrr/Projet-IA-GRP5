@@ -3,6 +3,9 @@ import datetime
 from datetime import date
 import pandas as pd
 
+from os import listdir
+from os.path import isfile, join
+
 # Prédire avec le modèle de régression linéaire par défaut
 def predict(data):
     clf = joblib.load("./model/rl_model.sav")
@@ -21,4 +24,15 @@ def get_données(dataset="dataset_trained.csv"):
 # Ajout d'une ligne au dataset 
 def add_voiture(df):
     df.to_csv('./data/dataset_trained.csv', mode='a', index=False, header=False)
+    return True
+
+
+# Récupération de la liste de tous les modèles
+def get_list_model():
+    allfiles = [f for f in listdir("./model") if isfile(join("./model", f))]
+    return allfiles
+
+# Entraînement d'un modèle 
+def train_model(df, model="rl_model.sav"):
+    # Code à faire
     return True

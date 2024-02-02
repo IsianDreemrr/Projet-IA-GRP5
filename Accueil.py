@@ -16,7 +16,7 @@ st.write("---")
 st.write("Bienvenue sur notre Web App !")
 st.write("---")
 st.header("Estimation")
-st.subheader("Estimez le bien de votre voiture")
+st.subheader("Estimez la valeur de votre voiture")
 st.write("---")
 
 # ------------
@@ -79,10 +79,19 @@ form_consommationmixte = st.number_input("Consommation mixte (en l/100km)", min_
 st.write(" ")
 # ------------
 form_normeeuro = st.radio("Norme européenne", ["EURO2","EURO3","EURO4","EURO5","EURO6",])
-st.write(" ")
-# ---- OPTIONS ----
-form_options = []
-# ------------
+st.write("")
+# ---- OPTIONS ----    
+st.write("Options")
+if "form_options" not in st.session_state:
+        st.session_state.form_options = []
+
+
+form_option_input = st.text_input("Ajouter une option")
+if st.button("Ajouter"):
+    st.session_state.form_options.append(form_option_input)
+if st.button("Vider"):
+    st.session_state.form_options = []
+st.write(st.session_state.form_options)
 st.write(" ")
 form_departement = st.number_input("Département", min_value=1, step=1)
 st.write(" ")
@@ -149,7 +158,7 @@ data = {
     'émissionsdeco2': [form_emmissionsdeco2],
     'consommationmixte': [form_consommationmixte],
     'normeeuro': [form_normeeuro],
-    'options': [form_options],
+    'options': [st.session_state.form_options],
     'departement': [form_departement],
     'id': [form_id],
     'waranty': [form_warranty],

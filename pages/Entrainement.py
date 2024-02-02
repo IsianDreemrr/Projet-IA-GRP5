@@ -8,16 +8,16 @@ st.set_page_config(
     page_icon=':file_folder:'
 )
 
-st.title("Données existantes")
+st.title("Entraînement")
+st.write("---")
+st.subheader("Données existantes")
 if st.button("Afficher tableau"):
     df_full = get_données()
     st.write(df_full)
 
-st.write("---")
 
-st.title("Entraînement")
 st.write("---")
-st.subheader("Entraînement d'un modèle")
+st.subheader("Ajout de données")
 
 
 # ------------
@@ -88,9 +88,20 @@ form_consommationmixte = str(form_consommationmixte_input)+" l/100km"
 st.write(" ")
 # ------------
 form_normeeuro = st.radio("Norme européenne", ["EURO2","EURO3","EURO4","EURO5","EURO6",])
+st.write("")
+# ---- OPTIONS ----    
+st.write("Options")
+if "form_options" not in st.session_state:
+        st.session_state.form_options = []
+
+
+form_option_input = st.text_input("Ajouter une option")
+if st.button("Ajouter"):
+    st.session_state.form_options.append(form_option_input)
+if st.button("Vider"):
+    st.session_state.form_options = []
+st.write(st.session_state.form_options)
 st.write(" ")
-# ---- OPTIONS ----
-form_options = []
 # ------------
 st.write(" ")
 form_departement = st.number_input("Département", min_value=1, step=1)
@@ -158,7 +169,7 @@ data = {
     'émissionsdeco2': [form_emmissionsdeco2],
     'consommationmixte': [form_consommationmixte],
     'normeeuro': [form_normeeuro],
-    'options': [form_options],
+    'options': [st.session_state.form_options],
     'departement': [form_departement],
     'id': [form_id],
     'waranty': [form_warranty],
@@ -188,6 +199,20 @@ if st.button("Ajouter voiture"):
     # retour = predict(data)
     # st.markdown(retour)
     # print(retour)
+
+st.write("---")
+st.subheader("Entraînement d'un modèle")
+st.text("Mettre à jour un modèle en l'entraînant avec les nouvelles données")
+# ------------
+selected_model = st.selectbox("Modèle",get_list_model())
+st.write(" ")
+# ------------
+
+if st.button("Entraîner modèle"):
+    df_training = get_données()
+    IsTrained = train_model(df_training, selected_model)
+    if IsTrained:
+        st.write("Modèle entraîné avec succès")
 
 
 # Noms dans la sidebar
