@@ -1,16 +1,16 @@
 # Projet-IA-GRP5
 
 
-# Projet
+# Enoncé du Projet choisit : 
 
-- **Projet de Machine Learning** : Ce projet implique l'utilisation de techniques de classification, régression, et clustering. Votre application inclura une **page analytique**, une **page d'entraînement**, et une page pour **utiliser les modèles entraînés**.
+ Projet Machine Learning classification / régression / clustering, votre application devra contenir une page analytique, une page entrainement et une page permettant d’utiliser le ou les modèles entraînés. 
 
 # Objectif
 
 - **Estimation de prix** : Découvrez le prix estimé de votre voiture en remplissant un formulaire simple.
 - **Analyse des données** : Visualisez les détails du dataset sur notre page analytique.
-- **Amélioration de l'IA**
-- **Modele 'IA** : Contribuez à l'amélioration de l'intelligence artificielle en ajoutant des données sur la page d'entraînement.
+- **Utilisation  de l'IA**
+- **Entrainement de l'IA** : Contribuez à l'amélioration de l'intelligence artificielle en ajoutant des données sur la page d'entraînement.
 
 # Données
 
