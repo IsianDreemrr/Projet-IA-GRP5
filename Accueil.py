@@ -13,7 +13,29 @@ st.set_page_config(
 st.title("Projet IA - Groupe 5")
 st.write("---")
 
-st.write("Bienvenue sur notre Web App !")
+
+
+text_side = """
+Bienvenue sur notre Web App!
+Découvrez le prix estimé de votre voiture en remplissant un formulaire simple. 
+Visualisez les détails du dataset sur notre page analytique. 
+Contribuez à l'amélioration de l'IA en ajoutant des données sur la page d'entraînement.
+"""
+
+image_path = '/Users/meriemoudahmane/Desktop/test/Projet-IA-GRP5/f9e14c9e-facc-46d4-b5e1-1138baaaee9c.webp'
+
+
+col1, col2 = st.columns([3, 2])  # Ajustez les proportions selon vos besoins
+
+
+with col1:
+    st.image(image_path, caption='', width=400)
+
+
+with col2:
+    st.write(text_side)
+
+
 st.write("---")
 st.header("Estimation")
 st.subheader("Estimez la valeur de votre voiture")
