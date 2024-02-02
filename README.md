@@ -3,7 +3,7 @@
 
 # Projet
 
-- **Type de Machine Learning** : Ce projet implique l'utilisation de techniques de classification, régression, et clustering. Votre application inclura une **page analytique**, une **page d'entraînement**, et une page pour **utiliser les modèles entraînés**.
+- **Projet de Machine Learning** : Ce projet implique l'utilisation de techniques de classification, régression, et clustering. Votre application inclura une **page analytique**, une **page d'entraînement**, et une page pour **utiliser les modèles entraînés**.
 
 # Objectif
 
