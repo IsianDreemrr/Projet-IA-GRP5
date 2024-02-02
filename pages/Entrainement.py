@@ -24,8 +24,11 @@ st.subheader("Ajout de données")
 form_publishedsince = st.number_input('Ancienneté de l\'annonce (en jours)', min_value=0, step=1)
 st.write(" ")
 # ------------
-form_carmodel = st.text_input("Modèle de voiture")
+form_carmodel_input = st.selectbox("Modèle de voiture",get_list_voitures())
+index_carmodel = [index for index, value in enumerate(get_list_voitures()) if value == form_carmodel_input]
+form_carmodel = index_carmodel[0]
 st.write(" ")
+
 # ------------
 form_price = st.number_input('Prix', min_value=0, step=1)
 st.write(" ")
@@ -33,22 +36,32 @@ st.write(" ")
 form_annee = st.slider("Année", 1950, 2024)
 st.write(" ")
 # ------------
-form_miseencirculation = st.date_input("Mise en circulation", datetime.date(int(date.today().year), int(date.today().month), int(date.today().day)))
-st.write(" ")
-# ------------
-form_controletechnique = st.radio("Contrôle technique", ["non requis","requis"])
+form_controletechnique_input = st.radio("Contrôle technique", ["Non requis","Requis"])
+if form_controletechnique_input == "Non requis":
+    form_controletechnique = 0
+else:
+    form_controletechnique = 1
 st.write(" ")
 # ------------
 form_kilometrage = st.number_input('Kilométrage', min_value=0, step=1)
 st.write(" ")
 # ------------
-form_energie = st.radio("Energie", ["Essence","Diesel", "Hybride essence électrique", "Electrique", "Hybride diesel électrique", "Bicarburation essence GPL", "Bicarburation essence bioéthanol"])
+list_energie = ["Essence","Diesel", "Hybride essence électrique", "Electrique", "Hybride diesel électrique", "Bicarburation essence GPL", "Bicarburation essence bioéthanol"]
+form_energie_input = st.selectbox("Energie", list_energie)
+index_energie = [index for index, value in enumerate(list_energie) if value == form_energie_input]
+form_energie = index_energie[0]
 st.write(" ")
 # ------------
-form_boitedevitesse = st.radio("Boite de vitesse", ["mécanique","automatique"])
+form_boitedevitesse_input = st.radio("Boite de vitesse", ["mécanique","automatique"])
+if form_boitedevitesse_input == "mécanique":
+    form_boitedevitesse = 0
+else:
+    form_boitedevitesse = 1
 st.write(" ")
 # ------------
-form_couleurexterieure = st.text_input("Couleur extérieure")
+form_couleurexterieure_input = st.selectbox("Couleur extérieure",get_list_couleurexterieure())
+index_couleurexterieure = [index for index, value in enumerate(get_list_couleurexterieure()) if value == form_couleurexterieure_input]
+form_couleurexterieure = index_couleurexterieure[0]
 st.write(" ")
 # ------------
 form_nombredeportes = st.slider("Nombre de portes", 2, 8)
@@ -57,102 +70,52 @@ st.write(" ")
 form_nombredeplaces = st.slider("Nombre de places", 1, 8)
 st.write(" ")
 # ------------
-form_garantie_input = st.slider("Garantie (en nombre de mois)", 0, 60)
-form_garantie = str(form_garantie_input)+" mois"
+form_garantie = st.slider("Garantie (en nombre de mois)", 0, 60)
 st.write(" ")
 # ------------
-form_premieremain = st.radio("Première main ?", ["oui","non"])
+form_premieremain_input = st.radio("Première main ?", ["Oui","Non"])
+if form_premieremain_input == "Oui":
+    form_premieremain = 0
+else:
+    form_premieremain = 1
 st.write(" ")
 # ------------
-form_nombredeproprietaires = st.slider("Nombre de propriétaires", 0, 5)
+form_puissancefiscale = st.number_input('Puissance fiscale (en CV)', min_value=0, step=1)
 st.write(" ")
 # ------------
-form_puissancefiscale_input = st.number_input('Puissance fiscale (en CV)', min_value=0, step=1)
-form_puissancefiscale = str(form_puissancefiscale_input)+" CV"
-st.write(" ")
-# ------------
-form_puissancedin_input = st.number_input('Puissance DIN (en CH)', min_value=0, step=1)
-form_puissancedin = str(form_puissancedin_input)+" ch"
+form_puissancedin = st.number_input('Puissance DIN (en CH)', min_value=0, step=1)
 st.write(" ")
 # ------------
 form_critair = st.slider("Indice Crit'air", 0, 5)
 st.write(" ")
 # ------------
-form_emmissionsdeco2_input = st.number_input("Emission de CO2 (en g/km)", min_value=0, step=1)
-form_emmissionsdeco2 = str(form_emmissionsdeco2_input)+" g/km"
+form_emmissionsdeco2 = st.number_input("Emission de CO2 (en g/km)", min_value=0, step=1)
 st.write(" ")
+
 # ------------
-form_consommationmixte_input = st.number_input("Consommation mixte (en l/100km)", min_value=0.0, step=0.1)
-form_consommationmixte = str(form_consommationmixte_input)+" l/100km"
-
-st.write(" ")
-# ------------
-form_normeeuro = st.radio("Norme européenne", ["EURO2","EURO3","EURO4","EURO5","EURO6",])
-st.write("")
-# ---- OPTIONS ----    
-st.write("Options")
-if "form_options" not in st.session_state:
-        st.session_state.form_options = []
-
-
-form_option_input = st.text_input("Ajouter une option")
-if st.button("Ajouter"):
-    st.session_state.form_options.append(form_option_input)
-if st.button("Vider"):
-    st.session_state.form_options = []
-st.write(st.session_state.form_options)
+form_normeeuro_input = st.selectbox("Norme européenne",get_list_norme_euro())
+index_normeeuro = [index for index, value in enumerate(get_list_norme_euro()) if value == form_normeeuro_input]
+form_normeeuro = index_normeeuro[0]
 st.write(" ")
 # ------------
 st.write(" ")
 form_departement = st.number_input("Département", min_value=1, step=1)
 st.write(" ")
-form_id = st.number_input("Identifiant", min_value=0, step=1)
-st.write(" ")
 
-# ---- Garantie : Doublon avec l'autre colonne un peu plus haut, mais les valeurs sont potentiellement différentes car ici
-# il a la mention "Garantie constructeur" qui existe ----
-form_warranty_input = st.radio("Type garantie", ["Garantie constructeur","Garantie","Aucune"])
-if form_warranty_input == "Garantie":
-    form_warranty = "Garantie "+str(form_garantie)+" mois"
-elif form_warranty_input == "Aucune":
-    form_warranty = ""
-else:
-    form_warranty = "Garantie constructeur"
-
-st.write(" ")
-
-# ---- Vendeur : Cette colonne ne sert pas à grand chose vu qu'il n'y a que "Professionnel" comme valeur existante, ou alors [vide]... ----
-form_vendeur_input = st.radio("Type de vendeur", ["Professionnel","Particulier","Non-renseigné"])
-if form_warranty_input == "Non-renseigné":
-     form_vendeur = ""
-else:
-    form_vendeur = form_vendeur_input
+# ------------
+form_vendeur = 0
+# ------------
+form_couleurintérieure_input = st.selectbox("Couleur intérieure",get_list_couleurintérieure())
+index_couleurintérieure = [index for index, value in enumerate(get_list_couleurintérieure()) if value == form_couleurintérieure_input]
+form_couleurintérieure = index_couleurintérieure[0]
 st.write(" ")
 # ------------
-form_verifieetgaranti = st.text_input("Vérifié et garanti par")
-st.write(" ")
-# ------------
-form_rechargeable_input = st.checkbox("Rechargeable ?")
-if form_rechargeable_input:
-    form_rechargeable = "oui"
-else:
-    form_rechargeable = "non"
-st.write(" ")
-# ------------
-form_autonomiebatterie_input = st.number_input('Autonomie de la batterie (en Km)', min_value=0, step=1)
-form_autonomiebatterie = str(form_autonomiebatterie_input) + " Km"
-st.write(" ")
-# ------------
-form_capacitébatterie_input = st.number_input('Capacité de la batterie (en kWh)', min_value=0.0, step=0.1)
-form_capacitébatterie = str(form_capacitébatterie_input) + " kWh"
-st.write(" ")
 
 data = {
     'publishedsince': [form_publishedsince],
     'carmodel': [form_carmodel],
     'price': [form_price],
     'année': [form_annee],
-    'miseencirculation': [form_miseencirculation],
     'contrôletechnique': [form_controletechnique],
     'kilométragecompteur': [form_kilometrage],
     'énergie': [form_energie],
@@ -162,22 +125,14 @@ data = {
     'nombredeplaces': [form_nombredeplaces],
     'garantie': [form_garantie],
     'premièremain(déclaratif)': [form_premieremain],
-    'nombredepropriétaires': [form_nombredeproprietaires],
     'puissancefiscale': [form_puissancefiscale],
     'puissancedin': [form_puissancedin],
     'crit\'air': [form_critair],
     'émissionsdeco2': [form_emmissionsdeco2],
-    'consommationmixte': [form_consommationmixte],
     'normeeuro': [form_normeeuro],
-    'options': [st.session_state.form_options],
     'departement': [form_departement],
-    'id': [form_id],
-    'waranty': [form_warranty],
     'vendeur': [form_vendeur],
-    'vérifié&garanti': [form_verifieetgaranti],
-    'rechargeable': [form_rechargeable],
-    'autonomiebatterie': [form_autonomiebatterie],
-    'capacitébatterie': [form_capacitébatterie],
+    'couleurintérieure': [form_couleurintérieure],
     }
 
 if st.button("Aperçu"):
