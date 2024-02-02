@@ -26,9 +26,9 @@ Les algorithmes suivants sont employés pour l'analyse et la prédiction des pri
 - **Random Forest** : Un ensemble d'arbres de décision pour la régression (et la classification), qui améliore la robustesse et la précision de la prédiction en moyennant les résultats de divers arbres.
 
  
-Commandes pour l'installation et le lancement de la Web App : 
-(Dans le dossier du projet)
+# Commandes pour l'installation et le lancement de la Web App : 
 
+(Dans le dossier du projet)
 python -m venv .venv
 .venv\Scripts\Activate.ps1
 pip install streamlit
