@@ -151,14 +151,23 @@ data = {
     'couleurintérieure': [form_couleurintérieure],
     }
 
+st.write("---")
+# ------------
+selected_model = st.selectbox("Choisir le modèle à utiliser",get_list_model())
+st.write(" ")
+# ------------
+
 if st.button("Estimer mon bien"):
 
     # st.write(data)    
     # df = pd.DataFrame(data)
     # st.write(df)
-    retour = predict(pd.DataFrame(data))
-    st.markdown(retour)
-    print(retour)
+    retour = predict_with(pd.DataFrame(data), selected_model)
+    # st.markdown(retour)
+    if retour:
+# X['carmodel'] = X['carmodel'].str.replace('\d', '', regex=True)
+        st.markdown("Votre voiture a une valeur de "+str(retour)+" €")
+
 
 # Noms dans la sidebar
 st.sidebar.markdown("Ahmed Amine BOUTHALEB")

@@ -31,7 +31,7 @@ def predict(data):
 # Prédire avec un modèle généré par entrainement sur la Web App
 def predict_with(data, model):
     clf = joblib.load("./model/"+model)
-    return clf.predict([data])
+    return clf.predict(data)
 
 # Récupération d'un dataframe 
 def get_données(dataset="data_trained.csv"):
@@ -69,6 +69,27 @@ def get_list_model():
     return allfiles
 
 # Entraînement d'un modèle 
-def train_model(df, model="rf_model.sav"):
-    # Code à faire
+def train_model(df, selectedmodel="lr_model.sav"):
+    X = get_données().drop(columns=['price'])  # Variables indépendantes
+    y = get_données()['price']  
+
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+    if selectedmodel == "lr_model.sav":
+        model = LinearRegression() 
+    elif selectedmodel == "ridge_model.sav":
+        alpha = 1.0  # Paramètre de régularisation, ajustez-le au besoin
+        model = Ridge(alpha=alpha) 
+
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
+    rmse = mean_squared_error(y_test, y_pred, squared=False)
+    r2 = r2_score(y_test, y_pred)
+
+    print("RMSE:", rmse)
+    print("R^2:", r2)
+
+    pickle.dump(model, open(selectedmodel, 'wb'))
+    os.replace(selectedmodel, "./model/"+selectedmodel)
     return True
